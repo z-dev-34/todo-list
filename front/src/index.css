@@ -1,0 +1,8 @@
+:root {
+    --main-bg-color: #DFFDE1;
+    --card-bg-color:#FAFAFA;
+  }
+
+body {
+    background-color: var(--main-bg-color);
+}
