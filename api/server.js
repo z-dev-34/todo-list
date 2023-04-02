@@ -1,11 +1,24 @@
 const express = require('express')
+const port = 3001
+const bodyParser = require('body-parser');
+const apiRouter = require('./apiRouter').router;
+// instantiate server
 const app = express()
-const port = 3000
 
-app.get('/', (req, res) => {
-    res.send('Todo list')
-})
+// body Parser configuration
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+// middleware 
+app.use(bodyParser.json());
+
+app.get('/', function (req, res) {
+    res.setHeader('Content-Type', 'text/html');
+    res.status(200).send('<h1>API REST for TODO LIST</h1>');
+});
+app.use('/api/', apiRouter);
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
+module.exports = app
