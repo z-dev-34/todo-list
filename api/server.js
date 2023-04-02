@@ -2,6 +2,9 @@ const express = require('express')
 const port = 3001
 const bodyParser = require('body-parser');
 const apiRouter = require('./apiRouter').router;
+
+
+const cors = require("cors");
 // instantiate server
 const app = express()
 
@@ -10,6 +13,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 // middleware 
+app.use(cors())
 app.use(bodyParser.json());
 
 app.get('/', function (req, res) {
@@ -21,4 +25,6 @@ app.use('/api/', apiRouter);
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
+
+
 module.exports = app
