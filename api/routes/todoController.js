@@ -30,6 +30,19 @@ module.exports = {
             });
         }
     },
+    createTodo: async (req, res) => {
+        try {
+            const todo = await models.Todo.create(req.body);
+            res.status(201).json({
+                message: "todo is created"
+            });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({
+                message: 'Server error'
+            });
+        }
+    },
     updateTodoById: async (req, res) => {
         try {
             const todo = await models.Todo.findByPk(req.params.id);
@@ -39,7 +52,9 @@ module.exports = {
                 });
             } else {
                 await todo.update(req.body);
-                res.json(todo);
+                res.status(200).json({
+                    message: "todo updated"
+                });
             }
         } catch (error) {
             console.error(error);
