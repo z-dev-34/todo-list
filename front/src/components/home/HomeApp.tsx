@@ -1,6 +1,12 @@
+import useGetAxios from "../../hooks/useGetAxios";
+import AddTodo from "../AddTodo";
 import ListTodo from "./ListTodo";
 
 export default function HomeApp() {
+  const url = `${process.env.REACT_APP_DATAURL}${process.env.REACT_APP_APIURl}`;
+  const [todos, setTodos] = useGetAxios({
+    url,
+  });
   return (
     <div className="container m-5 p-2 rounded mx-auto bg-light shadow container-card-todo">
       <div className="row m-1 p-4">
@@ -9,7 +15,8 @@ export default function HomeApp() {
             <h1>Todo List</h1>
           </div>
         </div>
-        <ListTodo />
+        <AddTodo setTodos={setTodos} />
+        <ListTodo todos={todos} />
       </div>
     </div>
   );

@@ -1,11 +1,9 @@
 import useGetAxios from "../../hooks/useGetAxios";
-import EditTodoBtn from "./buttons/EditTodoBtn";
-import ShowTodoBtn from "./buttons/ShowTodoBtn";
+import { ITodo } from "../../models";
+import EditTodoBtn from "../buttons/EditTodoBtn";
+import ShowTodoBtn from "../buttons/ShowTodoBtn";
 
-export default function ListTodos() {
-  const todos = useGetAxios({
-    url: "http://localhost:3001/api/todos/",
-  });
+export default function ListTodos({ todos }: { todos: ITodo[] }) {
   return (
     <table className="table table-striped">
       <thead>

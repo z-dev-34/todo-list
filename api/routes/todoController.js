@@ -3,7 +3,11 @@ const models = require('../model');
 module.exports = {
     findAllTodos: async (req, res) => {
         try {
-            const todos = await models.Todo.findAll()
+            const todos = await models.Todo.findAll({
+                order: [
+                    ['id', 'DESC']
+                ]
+            })
             res.status(200).json(todos);
 
         } catch (error) {
