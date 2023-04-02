@@ -21,6 +21,24 @@ module.exports = {
                     message: 'Todo not found'
                 });
             } else {
+                res.status(200).json(todo);
+            }
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({
+                message: 'Server error'
+            });
+        }
+    },
+    updateTodoById: async (req, res) => {
+        try {
+            const todo = await models.Todo.findByPk(req.params.id);
+            if (!todo) {
+                res.status(404).json({
+                    message: 'Todo not found'
+                });
+            } else {
+                await todo.update(req.body);
                 res.json(todo);
             }
         } catch (error) {
@@ -29,5 +47,6 @@ module.exports = {
                 message: 'Server error'
             });
         }
+
     }
 }

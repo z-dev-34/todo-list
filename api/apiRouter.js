@@ -8,6 +8,8 @@ exports.router = (function () {
     // Users routes
     apiRouter.route('/todos').get(todoController.findAllTodos);
     apiRouter.route('/todos/:id').get(todoController.findTodoById);
+    apiRouter.route('/todos/:id').put(todoController.updateTodoById);
+
 
 
     return apiRouter;
