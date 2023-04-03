@@ -12,11 +12,13 @@ export default function AddTodoBtn({
 }) {
   const handleClick = async () => {
     const url = `${process.env.REACT_APP_DATAURL}${process.env.REACT_APP_APIURl}`;
-    const response = await postAxios(url, todo);
-    if (response === 201) {
+    const status = await postAxios(url, todo);
+    console.log(status);
+    if (status === 201) {
       setTodos(todo);
+    } else {
+      console.log("err");
     }
-
     //
   };
 

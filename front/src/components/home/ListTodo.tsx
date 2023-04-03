@@ -1,4 +1,3 @@
-import useGetAxios from "../../hooks/useGetAxios";
 import { ITodo } from "../../models";
 import EditTodoBtn from "../buttons/EditTodoBtn";
 import ShowTodoBtn from "../buttons/ShowTodoBtn";
@@ -14,8 +13,7 @@ export default function ListTodos({ todos }: { todos: ITodo[] }) {
         </tr>
       </thead>
       <tbody>
-        {todos &&
-          todos.length > 0 &&
+        {todos && todos.length > 0 ? (
           todos.map((todo, index) => (
             <tr key={index}>
               <th scope="row">
@@ -30,11 +28,18 @@ export default function ListTodos({ todos }: { todos: ITodo[] }) {
               </th>
               <td>{todo.title}</td>
               <td>
-                <ShowTodoBtn />
-                <EditTodoBtn />
+                <ShowTodoBtn todo={todo} />
+                <EditTodoBtn todo={todo} />
               </td>
             </tr>
-          ))}
+          ))
+        ) : (
+          <tr>
+            <td colSpan={3} className="text-center">
+              empty
+            </td>
+          </tr>
+        )}
       </tbody>
     </table>
   );
