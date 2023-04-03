@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
-import HomeApp from "./home/HomeApp";
-import EditTodo from "./todo/EditTodo";
-import ShowTodo from "./todo/ShowTodo";
+import HomeApp from "./pages/HomeApp";
+import EditTodo from "./pages/EditTodo";
+import ShowTodo from "./pages/ShowTodo";
 
 export default function App() {
   return (

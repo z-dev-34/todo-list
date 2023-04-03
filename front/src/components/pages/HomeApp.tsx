@@ -1,6 +1,6 @@
 import useGetAxios from "../../hooks/useGetAxios";
 import AddTodo from "../AddTodo";
-import ListTodo from "./ListTodo";
+import ListTodo from "../home/ListTodo";
 
 export default function HomeApp() {
   const url = `${process.env.REACT_APP_DATAURL}${process.env.REACT_APP_APIURl}`;

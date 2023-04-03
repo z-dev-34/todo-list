@@ -3,7 +3,9 @@ import { ITodo } from "../models";
 
 export const postAxios = async(url:string,paylod:ITodo) => {
     try {
-       return await axios.post(url,paylod).then(res=>res.status)
+      const response =  await axios.post(url,paylod)
+      return response.status
+  
     }
     catch(err) {
         return err
