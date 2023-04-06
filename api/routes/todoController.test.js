@@ -67,7 +67,7 @@ describe('GET /api/todos', () => {
     });
 });
 describe('POST /todos', () => {
-    test('creates a new todo item', async () => {
+    it('creates a new todo item', async () => {
         const todo = {
             title: "tache new",
             description: "test to test",
@@ -86,7 +86,7 @@ describe('POST /todos', () => {
     });
 });
 describe('PUT /todos/:id', () => {
-    test('updates an existing todo item', async () => {
+    it('updates an existing todo item', async () => {
         const todo = {
             id: 1,
             title: "tache une",
@@ -105,3 +105,23 @@ describe('PUT /todos/:id', () => {
         });
     });
 });
+describe('PATCH /todos/:id', () => {
+    it('updates state an existing todo item', async () => {
+        const todo = {
+            id: 1,
+            title: "tache une",
+            description: "test to test",
+            isCompleted: true,
+            createdAt: "2023-04-01",
+            updatedAt: "2023-04-01"
+        }
+        const response = await request(app)
+            .put('/api/todos/1')
+            .send(todo)
+            .set('Accept', 'application/json');
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual({
+            message: "todo done"
+        });
+    });
+})
