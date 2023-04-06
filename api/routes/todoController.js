@@ -67,5 +67,28 @@ module.exports = {
             });
         }
 
+    },
+    updateStateTodoById: async (req, res) => {
+        try {
+            const todo = await models.Todo.findByPk(req.params.id);
+            if (!todo) {
+                res.status(404).json({
+                    message: 'Todo not found'
+                });
+            } else {
+                const updateTodo = todo.isCompleted = req.body
+                await todo.update(updateTodo);
+                res.status(200).json({
+                    message: "todo Done"
+                });
+            }
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({
+                message: 'Server error'
+            });
+        }
+
     }
+
 }
