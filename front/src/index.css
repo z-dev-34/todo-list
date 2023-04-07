@@ -6,3 +6,13 @@
 body {
     background-color: var(--main-bg-color);
 }
+
+.title-through {
+  text-decoration: line-through;
+}
+.title-todo {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 17px;
+}
