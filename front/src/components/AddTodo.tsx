@@ -1,11 +1,7 @@
 import { ChangeEvent, Fragment, useState } from "react";
 import AddTodoBtn from "./buttons/AddTodoBtn";
 import { ITodo } from "../models";
-export default function AddTodo({
-  setTodos,
-}: {
-  setTodos: (newTodo: ITodo) => void;
-}) {
+export default function AddTodo() {
   const [todo, setTodo] = useState<ITodo>({
     title: "",
     description: "",
@@ -37,7 +33,7 @@ export default function AddTodo({
               />
             </div>
             <div className="col-auto px-0 mx-0 mr-2">
-              <AddTodoBtn todo={todo} setTodos={setTodos} disabled={disabled} />
+              <AddTodoBtn todo={todo} disabled={disabled} />
             </div>
           </div>
         </div>
