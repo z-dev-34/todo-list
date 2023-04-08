@@ -1,8 +1,23 @@
+import { useEffect } from "react";
 import { patchAxios } from "../../commons";
-import { ITodo, TypeActionBtn } from "../../models";
+import { TypeActionBtn } from "../../models";
+import { useTodosDispatch, useTodosState } from "../../providers/TodoProvider";
 import { MyBtn } from "../buttons/MyBtn";
+import useGetAxios from "../../hooks/useGetAxios";
 
-export default function ListTodos({ todos }: { todos: ITodo[] }) {
+export default function ListTodos() {
+  const dispatch = useTodosDispatch();
+  const url = `${process.env.REACT_APP_DATAURL}${process.env.REACT_APP_APIURl}`;
+  const todos = useGetAxios({
+    url,
+  });
+  useEffect(() => {
+    dispatch({
+      type: "FETCHALL",
+      payload: todos,
+    });
+  }, []);
+  const todosItems = useTodosState();
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = e.target;
     const isCompleted = {
@@ -27,8 +42,8 @@ export default function ListTodos({ todos }: { todos: ITodo[] }) {
         </tr>
       </thead>
       <tbody>
-        {todos && todos.length > 0 ? (
-          todos.map((todo, index) => (
+        {todosItems && todosItems.length > 0 ? (
+          todosItems.map((todo, index) => (
             <tr key={index}>
               <th scope="row">
                 <div className="form-check">

@@ -1,21 +1,24 @@
 import { useMemo } from "react";
 import { ITodo } from "../../models";
 import { postAxios } from "../../commons/index";
+import { useTodosDispatch } from "../../providers/TodoProvider";
 export default function AddTodoBtn({
   todo,
-  setTodos,
   disabled,
 }: {
   todo: ITodo;
-  setTodos: (newTodo: ITodo) => void;
   disabled: boolean;
 }) {
+  const dispatch = useTodosDispatch();
   const handleClick = async () => {
     const url = `${process.env.REACT_APP_DATAURL}${process.env.REACT_APP_APIURl}`;
     const status = await postAxios(url, todo);
     console.log(status);
     if (status === 201) {
-      setTodos(todo);
+      dispatch({
+        type: "CREATE",
+        todo,
+      });
     } else {
       console.log("err");
     }
