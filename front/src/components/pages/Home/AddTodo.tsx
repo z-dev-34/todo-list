@@ -1,22 +1,15 @@
 import { ChangeEvent, Fragment, useState } from "react";
-import AddTodoBtn from "./buttons/AddTodoBtn";
-import { ITodo } from "../models";
+import AddTodoBtn from "../../buttons/AddTodoBtn";
+
 export default function AddTodo() {
-  const [todo, setTodo] = useState<ITodo>({
-    title: "",
-    description: "",
-    isCompleted: false,
-  });
+  const [todoTitle, setTodoTitle] = useState<string>("");
   const [disabled, setDisabled] = useState<boolean>(true);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const title = e.target.value;
     if (title) {
       setDisabled(false);
     }
-    setTodo((prevState) => ({
-      ...prevState,
-      ["title"]: title,
-    }));
+    setTodoTitle(title);
   };
   return (
     <Fragment>
@@ -33,7 +26,7 @@ export default function AddTodo() {
               />
             </div>
             <div className="col-auto px-0 mx-0 mr-2">
-              <AddTodoBtn todo={todo} disabled={disabled} />
+              <AddTodoBtn todoTitle={todoTitle} disabled={disabled} />
             </div>
           </div>
         </div>

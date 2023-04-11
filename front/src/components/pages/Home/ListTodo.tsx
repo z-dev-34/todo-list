@@ -1,9 +1,12 @@
 import { useEffect } from "react";
-import { patchAxios } from "../../commons";
-import { TypeActionBtn } from "../../models";
-import { useTodosDispatch, useTodosState } from "../../providers/TodoProvider";
-import { MyBtn } from "../buttons/MyBtn";
-import useGetAxios from "../../hooks/useGetAxios";
+import { patchAxios } from "../../../commons";
+import { TypeActionBtn } from "../../../models";
+import {
+  useTodosDispatch,
+  useTodosState,
+} from "../../../providers/TodoProvider";
+import { MyBtn } from "../../buttons/MyBtn";
+import useGetAxios from "../../../hooks/useGetAxios";
 
 export default function ListTodos() {
   const dispatch = useTodosDispatch();
@@ -11,12 +14,13 @@ export default function ListTodos() {
   const todos = useGetAxios({
     url,
   });
+  console.log(todos);
   useEffect(() => {
     dispatch({
       type: "FETCHALL",
       payload: todos,
     });
-  }, []);
+  }, [todos]);
   const todosItems = useTodosState();
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = e.target;
@@ -27,9 +31,7 @@ export default function ListTodos() {
     const response = await patchAxios(url, isCompleted);
     const { status } = response;
     if (status === 200) {
-      console.log();
     } else {
-      console.log("err");
     }
   };
   return (
