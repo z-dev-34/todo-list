@@ -1,6 +1,6 @@
-import { TodosContextProvider } from "../../providers/TodoProvider";
-import AddTodo from "../AddTodo";
-import ListTodo from "../home/ListTodo";
+import { TodosContextProvider } from "../../../providers/TodoProvider";
+import AddTodo from "./AddTodo";
+import ListTodo from "./ListTodo";
 
 export default function HomeApp() {
   return (
@@ -11,9 +11,9 @@ export default function HomeApp() {
             <div className="p-1 h1 text-center mx-auto display-inline-block">
               <h1>Todo List</h1>
             </div>
+            <AddTodo />
+            <ListTodo />
           </div>
-          <AddTodo />
-          <ListTodo />
         </div>
       </div>
     </TodosContextProvider>

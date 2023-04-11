@@ -5,7 +5,13 @@ import { ITodo } from "../models";
 export default function useGetAxios({ url }: { url: string }) {
   const [data, setData] = useState<ITodo[]>([]);
   useEffect(() => {
-    Axios.get(url).then((res) => setData((v) => res.data));
+    Axios.get(url).then((res) => {
+      if (Array.isArray(res.data)) {
+        setData(() => res.data);
+      } else {
+        setData(() => [res.data]);
+      }
+    });
   }, []);
   return data;
 }

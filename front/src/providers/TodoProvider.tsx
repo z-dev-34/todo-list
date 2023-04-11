@@ -2,7 +2,7 @@ import React, { createContext, Dispatch, useReducer, useContext } from "react";
 import { ITodo } from "../models";
 export type TodosState = ITodo[];
 
-const TodosStateContext = createContext<TodosState | undefined>(undefined);
+const TodosStateContext = createContext<TodosState>([]);
 
 type Action =
   | { type: "FETCHALL"; payload: ITodo[] }
@@ -18,8 +18,8 @@ const TodosDispatchContext = createContext<TodosDispatch | undefined>(
 function todosReducer(state: TodosState, action: Action): TodosState {
   switch (action.type) {
     case "FETCHALL":
-      const data = action.payload;
-      return [...state, ...data];
+      console.log("switch", action.payload);
+      return [...state, ...action.payload];
     case "CREATE":
       return state.concat(action.todo);
     case "TOGGLE":
@@ -27,10 +27,12 @@ function todosReducer(state: TodosState, action: Action): TodosState {
         todo.id === action.id ? { ...todo, done: !todo.isCompleted } : todo
       );
     case "UPDATE":
-      const newTodos = state.filter((todo) => todo.id !== action.todoUpdate.id);
-      return newTodos.concat(action.todoUpdate);
+      return state
+        .filter((todo) => todo.id !== action.todoUpdate.id)
+        .concat(action.todoUpdate);
+
     default:
-      throw new Error("Unhandled action");
+      return state;
   }
 }
 
@@ -50,14 +52,14 @@ export function TodosContextProvider({
   );
 }
 
-export function useTodosState() {
+export const useTodosState = (): TodosState => {
   const state = useContext(TodosStateContext);
   if (!state) throw new Error("TodosProvider not found");
   return state;
-}
+};
 
-export function useTodosDispatch() {
+export const useTodosDispatch = (): TodosDispatch => {
   const dispatch = useContext(TodosDispatchContext);
   if (!dispatch) throw new Error("TodosProvider not found");
   return dispatch;
-}
+};
