@@ -23,14 +23,16 @@ export default function ListTodos() {
   }, [todos]);
   const todosItems = useTodosState();
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, checked } = e.target;
-    const isCompleted = {
-      isCompleted: !checked,
-    };
+    const { value } = e.target;
+
     const url = `${process.env.REACT_APP_DATAURL}${process.env.REACT_APP_APIURl}${value}`;
-    const response = await patchAxios(url, isCompleted);
+    const response = await patchAxios(url);
     const { status } = response;
     if (status === 200) {
+      dispatch({
+        type: "TOGGLE",
+        id: parseInt(value),
+      });
     } else {
     }
   };
@@ -58,6 +60,7 @@ export default function ListTodos() {
                     onChange={handleChange}
                     disabled={todo.isCompleted}
                   />
+                  {todo.isCompleted}
                 </div>
               </th>
               <td

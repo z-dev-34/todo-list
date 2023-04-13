@@ -13,11 +13,9 @@ export const postAxios = async(url:string,paylod:ITodo) => {
 } 
 
 
-export const patchAxios  = (url:string,paylod:{isCompleted:boolean}):Promise<AxiosResponse> => {
+export const patchAxios  = (url:string):Promise<AxiosResponse> => {
   try {
-    return axios.patch(url,paylod)
-    
-
+    return axios.patch(url)
   }
   catch(err) {
       throw "err";
@@ -33,3 +31,9 @@ export const updateAxios  = (url:string,paylod:ITodo):Promise<AxiosResponse> => 
       throw "err";
   }
 } 
+
+export const sortItems = (items:ITodo[]):ITodo[]=>{
+ return  items.sort(function (x, y) {
+    return x.isCompleted === y.isCompleted ? 0 : !x.isCompleted ? -1 : 1;
+  });
+}

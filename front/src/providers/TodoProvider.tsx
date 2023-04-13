@@ -1,5 +1,6 @@
 import React, { createContext, Dispatch, useReducer, useContext } from "react";
 import { ITodo } from "../models";
+import { sortItems } from "../commons";
 export type TodosState = ITodo[];
 
 const TodosStateContext = createContext<TodosState>([]);
@@ -18,18 +19,24 @@ const TodosDispatchContext = createContext<TodosDispatch | undefined>(
 function todosReducer(state: TodosState, action: Action): TodosState {
   switch (action.type) {
     case "FETCHALL":
-      console.log("switch", action.payload);
-      return [...state, ...action.payload];
+      return sortItems(action.payload);
+
     case "CREATE":
-      return state.concat(action.todo);
+      return sortItems(state.concat(action.todo));
     case "TOGGLE":
-      return state.map((todo) =>
-        todo.id === action.id ? { ...todo, done: !todo.isCompleted } : todo
+      return sortItems(
+        state.map((todo) =>
+          todo.id === action.id
+            ? { ...todo, isCompleted: !todo.isCompleted }
+            : todo
+        )
       );
     case "UPDATE":
-      return state
-        .filter((todo) => todo.id !== action.todoUpdate.id)
-        .concat(action.todoUpdate);
+      return sortItems(
+        state
+          .filter((todo) => todo.id !== action.todoUpdate.id)
+          .concat(action.todoUpdate)
+      );
 
     default:
       return state;

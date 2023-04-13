@@ -17,7 +17,10 @@ module.exports = (sequelize, DataTypes) => {
         },
         isCompleted: {
             type: DataTypes.BOOLEAN,
-            defaultValue: false
+            defaultValue: false,
+            set(value) {
+                this.setDataValue('isCompleted', value);
+            }
         },
         createdAt: {
             type: DataTypes.DATE,
