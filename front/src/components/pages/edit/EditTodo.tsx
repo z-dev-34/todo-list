@@ -8,7 +8,6 @@ export default function EditTodo() {
   const todos = useGetAxios({
     url,
   });
-  console.log(todos);
   return (
     <TodosContextProvider>
       <div className="container m-5 p-2 rounded mx-auto bg-light shadow container-card-todo">
