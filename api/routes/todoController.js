@@ -75,8 +75,10 @@ module.exports = {
                     message: 'Todo not found'
                 });
             } else {
-                const updateTodo = todo.isCompleted = req.body
-                await todo.update(updateTodo);
+                todo.set({
+                    isCompleted: !todo.isCompleted
+                })
+                todo.save()
                 res.status(200).json({
                     message: "todo Done"
                 });
