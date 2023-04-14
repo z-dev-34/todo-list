@@ -14,7 +14,6 @@ export default function ListTodos() {
   const todos = useGetAxios({
     url,
   });
-  console.log(todos);
   useEffect(() => {
     dispatch({
       type: "FETCHALL",
