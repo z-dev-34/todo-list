@@ -4,6 +4,7 @@ import { AxiosResponse, ITodo } from "../../../models";
 import { useParams } from "react-router-dom";
 import { updateAxios } from "../../../commons";
 import { useTodosDispatch } from "../../../providers/TodoProvider";
+import { BackHomeIcon } from "../../buttons/BackHomeIcon";
 
 export default function FormEdit({ todos }: { todos: ITodo[] }) {
   const {
@@ -71,7 +72,7 @@ export default function FormEdit({ todos }: { todos: ITodo[] }) {
               })}
             ></textarea>
           </div>
-          <div className="form-check">
+          <div className="form-check align-end">
             <input
               className="form-check-input"
               type="checkbox"
@@ -91,10 +92,15 @@ export default function FormEdit({ todos }: { todos: ITodo[] }) {
           </div>
         </div>
       ))}
-      <input type="submit" />
+      <div className="d-flex justify-content-between mt-4">
+        <BackHomeIcon />
+        <button type="submit" className="btn btn-primary bg-primary">
+          Modifier
+        </button>
+      </div>
       {success && (
         <div className="alert alert-success" role="alert">
-          This Todo is updated <a href="/">all to do list </a>
+          This Todo is updated
         </div>
       )}
     </form>

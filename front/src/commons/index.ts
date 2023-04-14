@@ -23,7 +23,7 @@ export const patchAxios  = (url:string):Promise<AxiosResponse> => {
 } 
 export const updateAxios  = (url:string,paylod:ITodo):Promise<AxiosResponse> => {
   try {
-    return axios.patch(url,paylod)
+    return axios.put(url,paylod)
     
 
   }

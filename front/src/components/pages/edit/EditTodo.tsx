@@ -2,7 +2,6 @@ import { useParams } from "react-router";
 import FormEdit from "./FormEdit";
 import useGetAxios from "../../../hooks/useGetAxios";
 import { TodosContextProvider } from "../../../providers/TodoProvider";
-import { BackHomeIcon } from "../../buttons/BackHomeIcon";
 export default function EditTodo() {
   const { id } = useParams();
   const url = `${process.env.REACT_APP_DATAURL}${process.env.REACT_APP_APIURl}${id}`;
@@ -18,7 +17,6 @@ export default function EditTodo() {
               <h1>Todo {id}</h1>
             </div>
             <FormEdit todos={todos} />
-            <BackHomeIcon />
           </div>
         </div>
       </div>
