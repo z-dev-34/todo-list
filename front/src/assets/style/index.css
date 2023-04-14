@@ -1,8 +1,9 @@
 :root {
     --main-bg-color: #DFFDE1;
     --card-bg-color:#FAFAFA;
-  }
-
+    --status-color-green:#80CC8C;
+    --status-color-gray:#D4D4D4;
+}
 body {
     background-color: var(--main-bg-color);
 }
@@ -15,4 +16,24 @@ body {
   font-weight: 400;
   font-size: 18px;
   line-height: 17px;
+}
+.status-done {
+  font-weight: 700;
+  font-size: 14px;
+  color:  var(--status-color-green);
+  text-transform: uppercase;
+  line-height: 14px;
+}
+.status-dont-done {
+  font-weight: 700;
+  font-size: 14px;
+  color:  var(--status-color-gray);
+  text-transform: uppercase;
+  line-height: 14px;
+}
+.text-right{
+  text-align: end;
+}
+.cursor-pointer {
+  cursor: pointer;
 }
