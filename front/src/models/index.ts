@@ -1,14 +1,15 @@
 import { AxiosRequestConfig } from "axios";
 
-export interface ITodo {
-    id ?: number;
+export interface INewTodo {
     title: string ;
     description?: string;
     isCompleted?: boolean;
     createdAt?: Date;
     updatedAt?: Date;
   }
-
+export interface ITodo extends INewTodo {
+  id : number;
+}
   export interface AxiosResponse<T = never>  {
     data:IDataResponse ;
     status: number;
@@ -18,12 +19,12 @@ export interface ITodo {
     request?: any;
 }
 
-export enum TypeActionBtn {
-  EDIT="edit",
-  SHOW="show"
-}
-
  interface IDataResponse {
   message:string;
   id:number;
+}
+
+export enum TypeActionBtn {
+  EDIT="edit",
+  SHOW="show"
 }

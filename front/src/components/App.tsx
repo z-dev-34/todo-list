@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import HomeApp from "./pages/Home/HomeApp";
+import HomeApp from "./pages/home/HomeApp";
 import EditTodo from "./pages/edit/EditTodo";
 import ShowTodo from "./pages/show/ShowTodo";
 
