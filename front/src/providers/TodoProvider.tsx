@@ -8,7 +8,7 @@ const TodosStateContext = createContext<TodosState>([]);
 type Action =
   | { type: "FETCHALL"; payload: ITodo[] }
   | { type: "CREATE"; todo: ITodo }
-  | { type: "TOGGLE"; id: number }
+  | { type: "TOGGLE"; id: number; updatedAt: Date }
   | { type: "UPDATE"; todoUpdate: ITodo };
 
 type TodosDispatch = Dispatch<Action>;
@@ -22,12 +22,17 @@ function todosReducer(state: TodosState, action: Action): TodosState {
       return sortItems(action.payload);
 
     case "CREATE":
-      return sortItems(state.concat(action.todo));
+      return [action.todo, ...state];
+
     case "TOGGLE":
       return sortItems(
         state.map((todo) =>
           todo.id === action.id
-            ? { ...todo, isCompleted: !todo.isCompleted }
+            ? {
+                ...todo,
+                isCompleted: !todo.isCompleted,
+                updatedAt: action.updatedAt,
+              }
             : todo
         )
       );

@@ -22,6 +22,7 @@ export interface ITodo extends INewTodo {
  interface IDataResponse {
   message:string;
   id:number;
+  updatedAt:Date
 }
 
 export enum TypeActionBtn {
