@@ -5,12 +5,13 @@ module.exports = {
         try {
             const todos = await models.Todo.findAll({
                 order: [
-                    ['id', 'DESC']
+                    ['createdAt', 'DESC']
                 ]
             })
             res.status(200).json(todos);
 
         } catch (error) {
+            console.log(error)
             res.status(500).json({
                 message: 'Server error'
             });
@@ -80,7 +81,7 @@ module.exports = {
                 })
                 todo.save()
                 res.status(200).json({
-                    message: "todo Done"
+                    message: "todo done"
                 });
             }
         } catch (error) {

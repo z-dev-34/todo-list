@@ -23,12 +23,13 @@ module.exports = (sequelize, DataTypes) => {
             }
         },
         createdAt: {
-            type: DataTypes.DATE,
-            defaultValue: DataTypes.NOW,
+            type: 'TIMESTAMP',
+            defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
         },
         updatedAt: {
-            type: DataTypes.DATE,
-            defaultValue: DataTypes.NOW,
+            type: 'TIMESTAMP',
+            defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+            allowNull: false
         }
     });
     return Todo;
