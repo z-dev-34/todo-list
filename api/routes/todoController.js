@@ -5,13 +5,12 @@ module.exports = {
         try {
             const todos = await models.Todo.findAll({
                 order: [
-                    ['createdAt', 'DESC']
+                    ['id', 'DESC']
                 ]
             })
             res.status(200).json(todos);
 
         } catch (error) {
-            console.log(error)
             res.status(500).json({
                 message: 'Server error'
             });
@@ -71,6 +70,7 @@ module.exports = {
     updateStateTodoById: async (req, res) => {
         try {
             const todo = await models.Todo.findByPk(req.params.id);
+            const updateAt = new Date()
             if (!todo) {
                 res.status(404).json({
                     message: 'Todo not found'
@@ -79,9 +79,11 @@ module.exports = {
                 todo.set({
                     isCompleted: !todo.isCompleted
                 })
+                todo.updatedAt = updateAt
                 todo.save()
                 res.status(200).json({
-                    message: "todo done"
+                    message: "todo Done",
+                    updatedAt: updateAt
                 });
             }
         } catch (error) {
