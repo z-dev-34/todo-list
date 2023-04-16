@@ -31,11 +31,12 @@ export default function ListTodos() {
 
     const url = `${process.env.REACT_APP_DATAURL}${process.env.REACT_APP_APIURl}${value}`;
     const response = await patchAxios(url);
-    const { status } = response;
+    const { status, data } = response;
     if (status === 200) {
       dispatch({
         type: "TOGGLE",
         id: parseInt(value),
+        updatedAt: data.updatedAt,
       });
     } else {
     }

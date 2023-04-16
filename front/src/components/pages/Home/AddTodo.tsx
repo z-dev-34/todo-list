@@ -22,11 +22,16 @@ export default function AddTodo() {
                 type="text"
                 name="title"
                 placeholder="Add new to do.."
+                value={todoTitle}
                 onChange={handleChange}
               />
             </div>
             <div className="col-auto px-0 mx-0 mr-2">
-              <AddTodoBtn todoTitle={todoTitle} disabled={disabled} />
+              <AddTodoBtn
+                todoTitle={todoTitle}
+                disabled={disabled}
+                setTodoTitle={setTodoTitle}
+              />
             </div>
           </div>
         </div>

@@ -4,9 +4,11 @@ import { useTodosDispatch } from "../../providers/TodoProvider";
 export default function AddTodoBtn({
   todoTitle,
   disabled,
+  setTodoTitle,
 }: {
   todoTitle: string;
   disabled: boolean;
+  setTodoTitle: (arg: string) => void;
 }) {
   const dispatch = useTodosDispatch();
   const handleClick = async () => {
@@ -19,6 +21,7 @@ export default function AddTodoBtn({
     const response = (await postAxios(url, todo)) as AxiosResponse;
     const { status, data } = response;
     if (status === 201) {
+      setTodoTitle("");
       todo.id = data.id;
       dispatch({
         type: "CREATE",
