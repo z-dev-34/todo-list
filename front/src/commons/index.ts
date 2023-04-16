@@ -1,7 +1,7 @@
 import axios from "axios";
-import { AxiosResponse, ITodo } from "../models";
+import { AxiosResponse, INewTodo, ITodo } from "../models";
 
-export const postAxios = async(url:string,paylod:ITodo) => {
+export const postAxios = async(url:string,paylod:INewTodo) => {
     try {
       const response =  await axios.post(url,paylod)
       return response;

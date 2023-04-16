@@ -7,6 +7,7 @@ import {
 } from "../../../providers/TodoProvider";
 import { MyBtn } from "../../buttons/MyBtn";
 import useGetAxios from "../../../hooks/useGetAxios";
+import { useNavigate } from "react-router-dom";
 
 export default function ListTodos() {
   const dispatch = useTodosDispatch();
@@ -21,6 +22,10 @@ export default function ListTodos() {
     });
   }, [todos]);
   const todosItems = useTodosState();
+  const navigate = useNavigate();
+  const handleClick = (id: number | undefined): void => {
+    navigate(`/todo/${id}/${TypeActionBtn.SHOW}`);
+  };
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
@@ -47,7 +52,7 @@ export default function ListTodos() {
       <tbody>
         {todosItems && todosItems.length > 0 ? (
           todosItems.map((todo, index) => (
-            <tr key={index}>
+            <tr key={index} className="cursor-pointer">
               <th scope="row">
                 <div className="form-check">
                   <input
@@ -57,12 +62,12 @@ export default function ListTodos() {
                     value={todo.id}
                     id="flexCheckDefault"
                     onChange={handleChange}
-                    disabled={todo.isCompleted}
                   />
                   {todo.isCompleted}
                 </div>
               </th>
               <td
+                onClick={() => handleClick(todo.id)}
                 className={
                   todo.isCompleted ? "title-todo title-through" : "title-todo"
                 }
@@ -70,11 +75,7 @@ export default function ListTodos() {
                 {todo.title}
               </td>
               <td>
-                <MyBtn
-                  todo={todo}
-                  type={TypeActionBtn.SHOW}
-                  disabled={todo.isCompleted}
-                >
+                <MyBtn todo={todo} type={TypeActionBtn.SHOW}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="26"
